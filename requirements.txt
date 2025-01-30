@@ -6,7 +6,6 @@ itsdangerous==2.2.0
 Jinja2==3.1.4
 MarkupSafe==2.1.5
 packaging==24.1
-Werkezeug==3.0.3
 opencv-python-headless==4.5.3.56
 mediapipe==0.8.7
 numpy==1.21.2
