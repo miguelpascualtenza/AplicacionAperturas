@@ -1,7 +1,7 @@
-Flask==2.0.1
+Flask
 opencv-python
-opencv-python-headless==4.5.3.56
+opencv-python-headless
 opencv-contrib-python
-mediapipe==0.8.7
-gunicorn==20.1.0
+mediapipe
+gunicorn
 pip>=25.0
