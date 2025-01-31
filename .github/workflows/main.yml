@@ -20,6 +20,7 @@ env:
   FLUTTER_VERSION: 3.24.0
   OPENCV_VERSION: "opencv-python-headless"
   OPENCV_ALTERNATIVE: "opencv-python"
+  OPENCV_FALLBACK: "opencv-contrib-python"
   
 jobs:
   build:
@@ -45,7 +46,10 @@ jobs:
         pip install --no-cache-dir -r requirements.txt || true
         pip install --no-cache-dir --force-reinstall flet
         echo "Attempting to install OpenCV..."
-        pip install --no-cache-dir ${{ env.OPENCV_VERSION }} || pip install --no-cache-dir ${{ env.OPENCV_ALTERNATIVE }} || echo "Skipping OpenCV installation"
+        pip install --no-cache-dir --prefer-binary ${{ env.OPENCV_VERSION }} || \
+        pip install --no-cache-dir --prefer-binary ${{ env.OPENCV_ALTERNATIVE }} || \
+        pip install --no-cache-dir --prefer-binary ${{ env.OPENCV_FALLBACK }} || \
+        echo "Skipping OpenCV installation"
 
     - name: Check installed packages
       run: pip list
