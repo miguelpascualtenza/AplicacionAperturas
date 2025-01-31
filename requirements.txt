@@ -5,3 +5,4 @@ opencv-contrib-python
 mediapipe
 gunicorn
 pip>=25.0
+flet
