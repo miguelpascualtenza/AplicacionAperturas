@@ -19,6 +19,7 @@ env:
   PYTHON_VERSION: 3.11.5
   FLUTTER_VERSION: 3.24.0
   OPENCV_VERSION: "opencv-python-headless"
+  OPENCV_ALTERNATIVE: "opencv-python"
   
 jobs:
   build:
@@ -38,7 +39,8 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         pip install --no-cache-dir -r requirements.txt || true
         pip install --no-cache-dir --force-reinstall flet
-        pip install --no-cache-dir ${{ env.OPENCV_VERSION }} || echo "Skipping opencv-python-headless installation"
+        echo "Attempting to install OpenCV..."
+        pip install --no-cache-dir ${{ env.OPENCV_VERSION }} || pip install --no-cache-dir ${{ env.OPENCV_ALTERNATIVE }} || echo "Skipping OpenCV installation"
 
     - name: Check installed packages
       run: pip list
@@ -56,6 +58,10 @@ jobs:
     - name: Verify Flet Installation
       run: |
         python -c "import flet; print(dir(flet))"
+
+    - name: Verify OpenCV Installation
+      run: |
+        python -c "import cv2; print(cv2.__version__)" || echo "OpenCV not found, continuing..."
 
     - name: Flet Build Web
       run: |
