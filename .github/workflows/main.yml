@@ -16,7 +16,7 @@ concurrency:
 env:
   BUILD_NUMBER: 1
   BUILD_VERSION: 1.0.0
-  PYTHON_VERSION: 3.10  # Cambia a una versión compatible
+  PYTHON_VERSION: 3.11
   FLUTTER_VERSION: 3.24.0
   
 jobs:
